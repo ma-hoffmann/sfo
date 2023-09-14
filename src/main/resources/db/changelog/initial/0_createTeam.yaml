@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0_create_team
+      author: mhoffmann1
+      changes:
+        - createTable:
+            tableName: team
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_team
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: integer
+                  defaultValueNumeric: 0
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+        - sql:
+            "sql": "CREATE UNIQUE INDEX uc_team_name ON team(lower(name))"
+            

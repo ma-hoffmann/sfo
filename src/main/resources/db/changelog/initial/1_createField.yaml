@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1_create_field
+      author: mhoffmann1
+      changes:
+        - createTable:
+            tableName: field
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_field
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: integer
+                  defaultValueNumeric: 0
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+        - sql:
+            "sql": "CREATE UNIQUE INDEX uc_field_name ON field(lower(name))"
