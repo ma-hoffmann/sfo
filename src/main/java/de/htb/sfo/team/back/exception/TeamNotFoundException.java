@@ -5,13 +5,13 @@ import lombok.Getter;
 
 public class TeamNotFoundException extends Exception {
 
-  private static final long serialVersionUID = 1753913728757247516L;
+    private static final long serialVersionUID = 1753913728757247516L;
 
-  @Getter
-  private final Team team;
+    @Getter
+    private final Team team;
 
-  public TeamNotFoundException(final Team team) {
-    super();
-    this.team = team;
-  }
+    public TeamNotFoundException(final Team team) {
+        super();
+        this.team = team;
+    }
 }

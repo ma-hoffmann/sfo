@@ -1,16 +1,16 @@
 server:
   port: 8010
-  
+
 spring:
   security:
     oauth2:
       client:
         provider:
-          keycloak: 
+          keycloak:
             issuer-uri: http://localhost:7777/realms/sfo
             user-name-attribute: preferred_username
             
-            
+
         registration:
           keycloak:
             client-id: sfo
@@ -29,14 +29,14 @@ spring:
     hibernate:
       ddl-auto: none
   liquibase:
-    enabled: false  
+    enabled: false
 
 vaadin:
   whitelisted-packages:
-  - com.vaadin
-  - org.vaadin
-  - dev.hilla
-  - de.htb.sfo
+    - com.vaadin
+    - org.vaadin
+    - dev.hilla
+    - de.htb.sfo
 application:
   navigation:
     name:
@@ -46,6 +46,5 @@ application:
       fields: "Sportplätze"
 
 logging:
-
-    org:
-      atmosphere: DEBUG
+  org:
+    atmosphere: DEBUG

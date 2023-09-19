@@ -13,29 +13,29 @@ import de.htb.sfo.team.front.event.TeamDeleteEvent;
 
 public class DeleteTeamConfirmationDialog extends ConfirmDialog implements ComponentEventListener<ConfirmEvent> {
 
-  private static final long serialVersionUID = 3928335669753774013L;
+    private static final long serialVersionUID = 3928335669753774013L;
 
-  private final Team team;
+    private final Team team;
 
-  public DeleteTeamConfirmationDialog(final Team team, final ComponentEventListener<TeamDeleteEvent> listener) {
+    public DeleteTeamConfirmationDialog(final Team team, final ComponentEventListener<TeamDeleteEvent> listener) {
 
-    addListener(TeamDeleteEvent.class, listener);
-    this.team = team;
-    setHeader("Löschen");
-    setText(String.format("Team %s wirklich löschen?", team.getName()));
-    setCancelable(true);
-    setCancelText("Nein");
+        addListener(TeamDeleteEvent.class, listener);
+        this.team = team;
+        setHeader("Löschen");
+        setText(String.format("Team %s wirklich löschen?", team.getName()));
+        setCancelable(true);
+        setCancelText("Nein");
 
-    setConfirmText("Ja");
-    addConfirmListener(this);
-  }
+        setConfirmText("Ja");
+        addConfirmListener(this);
+    }
 
-  @Override
-  public void onComponentEvent(final ConfirmEvent event) {
-    fireEvent(new TeamDeleteEvent(this, this.team));
-  }
+    @Override
+    public void onComponentEvent(final ConfirmEvent event) {
+        fireEvent(new TeamDeleteEvent(this, this.team));
+    }
 
-  public Registration addTeamDeleteListener(final ComponentEventListener<TeamDeleteEvent> listener) {
-    return addListener(TeamDeleteEvent.class, listener);
-  }
+    public Registration addTeamDeleteListener(final ComponentEventListener<TeamDeleteEvent> listener) {
+        return addListener(TeamDeleteEvent.class, listener);
+    }
 }

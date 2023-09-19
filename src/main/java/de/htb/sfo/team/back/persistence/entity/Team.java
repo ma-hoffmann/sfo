@@ -20,15 +20,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Team implements Serializable {
 
-  private static final long serialVersionUID = 7540903634957518488L;
+    private static final long serialVersionUID = 7540903634957518488L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Version
-  private Long version;
+    @Version
+    private Long version;
 
-  @Column(length = 100, nullable = false)
-  private String name;
+    @Column(length = 100, nullable = false)
+    private String name;
 }

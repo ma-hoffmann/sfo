@@ -15,26 +15,26 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class FieldService implements Serializable {
 
-  private static final long serialVersionUID = -4166227375980627201L;
+    private static final long serialVersionUID = -4166227375980627201L;
 
-  private final FieldRepository repository;
+    private final FieldRepository repository;
 
-  public List<Field> getAllFields() {
-    return this.repository.findAll();
-  }
-
-  public void deleteField(final Field field) throws FieldNotFoundException {
-    if (this.repository.findById(field.getId()).isEmpty()) {
-      throw new FieldNotFoundException(field);
+    public List<Field> getAllFields() {
+        return this.repository.findAll();
     }
-    this.repository.delete(field);
-  }
 
-  public Optional<Field> getFieldByID(final Long fieldID) {
-    return this.repository.findById(fieldID);
-  }
+    public void deleteField(final Field field) throws FieldNotFoundException {
+        if (this.repository.findById(field.getId()).isEmpty()) {
+            throw new FieldNotFoundException(field);
+        }
+        this.repository.delete(field);
+    }
 
-  public Field saveField(final Field field) {
-    return this.repository.save(field);
-  }
+    public Optional<Field> getFieldByID(final Long fieldID) {
+        return this.repository.findById(fieldID);
+    }
+
+    public Field saveField(final Field field) {
+        return this.repository.save(field);
+    }
 }

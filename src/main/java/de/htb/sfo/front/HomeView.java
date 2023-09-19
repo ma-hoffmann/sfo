@@ -12,16 +12,16 @@ import jakarta.annotation.security.PermitAll;
 @PermitAll
 public class HomeView extends VerticalLayout {
 
-  private static final long serialVersionUID = 6956719720887737961L;
+    private static final long serialVersionUID = 6956719720887737961L;
 
-  public HomeView() {
-    Image logoHTB = new Image("images/test.png", "Logo HTB");
-    Image logoSGDHI = new Image("images/logo_sgdhi.png", "Logo HTB");
-    add(logoHTB);
-    add(logoSGDHI);
+    public HomeView() {
+        Image logoHTB = new Image("images/test.png", "Logo HTB");
+        Image logoSGDHI = new Image("images/logo_sgdhi.png", "Logo HTB");
+        add(logoHTB);
+        add(logoSGDHI);
 
-    this.setHorizontalComponentAlignment(Alignment.CENTER, logoHTB);
-    this.setHorizontalComponentAlignment(Alignment.CENTER, logoSGDHI);
-  }
+        this.setHorizontalComponentAlignment(Alignment.CENTER, logoHTB);
+        this.setHorizontalComponentAlignment(Alignment.CENTER, logoSGDHI);
+    }
 
 }

@@ -14,14 +14,14 @@ import lombok.Data;
 @Table(name = "field")
 public class Field {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Version
-  private Long version;
+    @Version
+    private Long version;
 
-  @Column(length = 100)
-  private String name;
+    @Column(length = 100)
+    private String name;
 
 }

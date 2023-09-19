@@ -12,10 +12,10 @@ import jakarta.annotation.security.PermitAll;
 @PermitAll
 public class OccupancyView extends VerticalLayout {
 
-  private static final long serialVersionUID = -2277123054732142395L;
+    private static final long serialVersionUID = -2277123054732142395L;
 
-  public OccupancyView() {
-    Span name = new Span("Seite der Belegungen");
-    add(name);
-  }
+    public OccupancyView() {
+        Span name = new Span("Seite der Belegungen");
+        add(name);
+    }
 }

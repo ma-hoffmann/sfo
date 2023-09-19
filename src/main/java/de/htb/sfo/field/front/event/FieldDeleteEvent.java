@@ -7,14 +7,14 @@ import de.htb.sfo.field.front.DeleteFieldConfirmationDialog;
 import lombok.Getter;
 
 public class FieldDeleteEvent extends ComponentEvent<DeleteFieldConfirmationDialog> {
-  private static final long serialVersionUID = -2165676105920744003L;
+    private static final long serialVersionUID = -2165676105920744003L;
 
-  @Getter
-  private final Field field;
+    @Getter
+    private final Field field;
 
-  public FieldDeleteEvent(final DeleteFieldConfirmationDialog source, final Field field) {
-    super(source, false);
-    this.field = field;
-  }
+    public FieldDeleteEvent(final DeleteFieldConfirmationDialog source, final Field field) {
+        super(source, false);
+        this.field = field;
+    }
 
 }

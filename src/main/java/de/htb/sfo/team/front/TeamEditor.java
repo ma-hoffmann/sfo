@@ -19,63 +19,63 @@ import de.htb.sfo.team.front.event.TeamSaveEvent;
 @Route("add-team-confirmation")
 public class TeamEditor extends Dialog {
 
-  private static final long serialVersionUID = 8833773107242325505L;
+    private static final long serialVersionUID = 8833773107242325505L;
 
-  private Team team;
+    private Team team;
 
-  private final TextField txtTeamName = new TextField("Mannschafts-Name");
+    private final TextField txtTeamName = new TextField("Mannschafts-Name");
 
-  Binder<Team> binder;
+    Binder<Team> binder;
 
-  public TeamEditor(final ComponentEventListener<TeamSaveEvent> listener) {
-    addListener(TeamSaveEvent.class, listener);
-    this.binder = new Binder<>(Team.class);
+    public TeamEditor(final ComponentEventListener<TeamSaveEvent> listener) {
+        addListener(TeamSaveEvent.class, listener);
+        this.binder = new Binder<>(Team.class);
 
-    setHeaderTitle("Neue Mannschaft");
+        setHeaderTitle("Neue Mannschaft");
 
-    VerticalLayout dialogLayout = createDialogLayout();
-    add(dialogLayout);
+        VerticalLayout dialogLayout = createDialogLayout();
+        add(dialogLayout);
 
-    Button cancelButton = new Button("Abbrechen", e -> {
-      this.team = null;
-      this.txtTeamName.clear();
-      close();
-    });
-    Button saveButton = new Button("Speichern", e -> {
-      try {
-        this.binder.writeBean(this.team);
-        fireEvent(new TeamSaveEvent(this, this.team));
+        Button cancelButton = new Button("Abbrechen", e -> {
+            this.team = null;
+            this.txtTeamName.clear();
+            close();
+        });
+        Button saveButton = new Button("Speichern", e -> {
+            try {
+                this.binder.writeBean(this.team);
+                fireEvent(new TeamSaveEvent(this, this.team));
 
-        close();
-      } catch (Exception ex) {
-        Notification.show(ex.getMessage()).addThemeVariants(NotificationVariant.LUMO_ERROR);
-      }
-    });
-    saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-    getFooter().add(cancelButton, saveButton);
+                close();
+            } catch (Exception ex) {
+                Notification.show(ex.getMessage()).addThemeVariants(NotificationVariant.LUMO_ERROR);
+            }
+        });
+        saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        getFooter().add(cancelButton, saveButton);
 
-    this.binder.forField(this.txtTeamName).bind(Team::getName, Team::setName);
-  }
+        this.binder.forField(this.txtTeamName).bind(Team::getName, Team::setName);
+    }
 
-  private VerticalLayout createDialogLayout() {
+    private VerticalLayout createDialogLayout() {
 
-    VerticalLayout dialogLayout = new VerticalLayout(this.txtTeamName);
-    dialogLayout.setPadding(false);
-    dialogLayout.setSpacing(false);
-    dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
-    dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
+        VerticalLayout dialogLayout = new VerticalLayout(this.txtTeamName);
+        dialogLayout.setPadding(false);
+        dialogLayout.setSpacing(false);
+        dialogLayout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        dialogLayout.getStyle().set("width", "18rem").set("max-width", "100%");
 
-    return dialogLayout;
-  }
+        return dialogLayout;
+    }
 
-  public void setTeam(final Team team) {
-    this.team = team;
-    this.binder.readBean(this.team);
-    this.txtTeamName.focus();
-  }
+    public void setTeam(final Team team) {
+        this.team = team;
+        this.binder.readBean(this.team);
+        this.txtTeamName.focus();
+    }
 
-  public Registration addTeamSaveListener(final ComponentEventListener<TeamSaveEvent> listener) {
-    return addListener(TeamSaveEvent.class, listener);
-  }
+    public Registration addTeamSaveListener(final ComponentEventListener<TeamSaveEvent> listener) {
+        return addListener(TeamSaveEvent.class, listener);
+    }
 
 }
