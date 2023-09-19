@@ -39,7 +39,7 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Bean
     public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
         return authorities -> {
-            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+            final Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
             var authority = authorities.iterator().next();
 
             if (authority instanceof OidcUserAuthority oidcUserAuthority) {
@@ -63,9 +63,10 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());
 
         http.oauth2Login(Customizer.withDefaults());
-        http.logout().addLogoutHandler(this.keycloakLogoutHandler)
+        http.logout((logout) -> logout
+        .logoutSuccessUrl("/").addLogoutHandler(this.keycloakLogoutHandler)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")).invalidateHttpSession(true)
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/"));
         super.configure(http);
     }
 
