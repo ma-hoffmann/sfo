@@ -9,7 +9,7 @@ spring:
           keycloak:
             issuer-uri: http://localhost:7777/realms/sfo
             user-name-attribute: preferred_username
-            
+
 
         registration:
           keycloak:
@@ -29,15 +29,25 @@ spring:
     hibernate:
       ddl-auto: none
   liquibase:
-    enabled: false
-
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    driver-class-name: ${spring.datasource.driver-class-name}
 vaadin:
+  heartbeatInterval: 10
+  closeIdleSessions: true
+
   whitelisted-packages:
     - com.vaadin
     - org.vaadin
     - dev.hilla
     - de.htb.sfo
 application:
+  images:
+    logo-htb: images/test.png
+    logo-sgdhi: images/logo_sgdhi.png
   navigation:
     name:
       home: "Home"
@@ -46,5 +56,7 @@ application:
       fields: "Sportplätze"
 
 logging:
+  level:
+    root: DEBUG
   org:
     atmosphere: DEBUG

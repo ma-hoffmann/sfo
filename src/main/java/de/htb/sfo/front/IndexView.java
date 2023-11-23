@@ -10,6 +10,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+import de.htb.sfo.back.ImageLoader;
+
 @PageTitle("Sportplatzbelegung")
 @Route(value = "/", layout = MainView.class)
 @AnonymousAllowed
@@ -17,9 +19,13 @@ public class IndexView extends VerticalLayout {
 
     private static final long serialVersionUID = 6956719720887737961L;
 
-    public IndexView() {
-        Image logoHTB = new Image("images/test.png", "Logo HTB");
-        Image logoSGDHI = new Image("images/logo_sgdhi.png", "Logo HTB");
+    private final ImageLoader imgLoader;
+
+
+    public IndexView(final ImageLoader imageLoader) {
+        this.imgLoader = imageLoader;
+        Image logoHTB = new Image(imgLoader.getImages().get("logo-htb"), "Logo HTB");
+        Image logoSGDHI = new Image(imgLoader.getImages().get("logo-sgdhi"), "Logo HTB");
         add(logoHTB);
         add(logoSGDHI);
         this.setHorizontalComponentAlignment(Alignment.CENTER, logoHTB);

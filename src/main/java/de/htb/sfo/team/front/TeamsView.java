@@ -32,7 +32,7 @@ public class TeamsView extends VerticalLayout {
     private final Grid<Team> grid = new Grid<>(Team.class);
     private final MenuBar menuBar = new MenuBar();
 
-    private SingleSelect<Grid<Team>, Team> teamSelect;
+    // private SingleSelect<Grid<Team>, Team> teamSelect;
     private final TeamEditor teamEditor;
 
     public TeamsView(final TeamService teamService) {
@@ -77,10 +77,10 @@ public class TeamsView extends VerticalLayout {
         this.grid.getColumnByKey("id").setVisible(false);
         this.grid.getColumnByKey("version").setVisible(false);
 
-        this.teamSelect = this.grid.asSingleSelect();
-        this.teamSelect.addValueChangeListener(e -> {
-            toggleButtons();
-        });
+        SingleSelect<Grid<Team>, Team> teamSelect = this.grid.asSingleSelect();
+        teamSelect.addValueChangeListener(e ->
+            toggleButtons()
+        );
         add(this.grid);
 
     }

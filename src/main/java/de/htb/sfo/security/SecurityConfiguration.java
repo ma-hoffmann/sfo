@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,7 +20,10 @@ import org.springframework.security.web.authentication.session.RegisterSessionAu
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
+
+import de.htb.sfo.back.SessionListener;
 
 @EnableWebSecurity
 @Configuration
@@ -34,6 +38,13 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<SessionListener> sessionListener(final AuthenticationContext authenticationContext) {
+        var bean = new ServletListenerRegistrationBean<SessionListener>();
+        bean.setListener(new SessionListener(authenticationContext));
+        return bean;
     }
 
     @Bean
@@ -59,9 +70,11 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());
-
+        http.authorizeHttpRequests(auth -> {
+                auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll();
+                auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/back-channel-logout")).permitAll();
+                });
+        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/back-channel-logout"));
         http.oauth2Login(Customizer.withDefaults());
         http.logout((logout) -> logout
         .logoutSuccessUrl("/").addLogoutHandler(this.keycloakLogoutHandler)
